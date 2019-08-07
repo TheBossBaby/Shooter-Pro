@@ -4,16 +4,20 @@ public class Player : MonoBehaviour
 {
   #region Scriptable Object
     [SerializeField] private MovementConfigurations _movementConfiguataion;
+  #endregion
+
+  #region SerializeField Private Field
     [SerializeField] private Transform _laserPrefab;
+    [SerializeField] private float _fireRate = 0.5f;      
   #endregion
 
   #region Private Field
-    [SerializeField] private float _fireRate = 0.5f;
     private float _canFire = -1f;
+    // private int _laserIndex = 0; 
   #endregion
 
   #region Public
-
+    // public Transform[] laserArray;
   #endregion
 
   #region MonoBehaviour Callback
@@ -33,6 +37,7 @@ public class Player : MonoBehaviour
       {
         // _laserPrefab.gameObject.SetActive(true);
         _canFire = Time.time + _fireRate;
+        // laserArray[_laserIndex].gameObject.SetActive(true);
         Instantiate(_laserPrefab, transform.position + Vector3.up, Quaternion.identity);
       }
     }

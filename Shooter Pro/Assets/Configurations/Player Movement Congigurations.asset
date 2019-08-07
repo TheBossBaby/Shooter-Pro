@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: Player Movement Congigurations
   m_EditorClassIdentifier: 
   playerMovementSpeed: 7
+  laserMovementSpeed: 12
+  enemyMovementSpeed: 5
