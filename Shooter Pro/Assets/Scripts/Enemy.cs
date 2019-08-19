@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-
 public class Enemy : MonoBehaviour
 {
     #region Scriptable Object
@@ -26,7 +25,11 @@ public class Enemy : MonoBehaviour
         {
            if(other.tag == "Player")
            {
-               Destroy(other.gameObject);
+               Player player = other.transform.GetComponent<Player>();
+               if(player != null)
+               {
+                   player.Damage();
+               }
                Destroy(gameObject);
            }
 

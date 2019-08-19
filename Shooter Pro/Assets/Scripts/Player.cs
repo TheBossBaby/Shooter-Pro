@@ -9,10 +9,12 @@ public class Player : MonoBehaviour
   #region SerializeField Private Field
     [SerializeField] private Transform _laserPrefab;
     [SerializeField] private float _fireRate = 0.5f;      
+    [SerializeField] private int _lives = 3;      
   #endregion
 
   #region Private Field
     private float _canFire = -1f;
+    private SpawnManager _spawnManager;
     // private int _laserIndex = 0; 
   #endregion
 
@@ -26,6 +28,12 @@ public class Player : MonoBehaviour
     {
       // Take position of player starting = new Position(0,0,0)
       transform.position = new Vector3(0,0,0);
+      _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+
+      if (_spawnManager == null)
+      {
+        Debug.LogError("Spawn Manager not refrenced properly");
+      }
     }
 
     // Update is called once per frame
@@ -44,7 +52,6 @@ public class Player : MonoBehaviour
   #endregion
 
   #region Private Methods
-
     void CalculatePlayer()
     {
       float horizontalInputAxis = Input.GetAxis("Horizontal");
@@ -63,6 +70,19 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(10f,transform.position.y,0);
       else if(transform.position.x >= 10f)
         transform.position = new Vector3(-10f,transform.position.y,0);
+    }
+  #endregion
+
+  #region Public Methods
+    public void Damage(int damageValue = 1)
+    {
+      _lives -= damageValue;
+
+      if(_lives <= 0)
+      {
+        _spawnManager.OnPalyerDeath();
+        Destroy(this.gameObject);
+      }
     }
   #endregion
 }
