@@ -5,7 +5,14 @@ public class Enemy : MonoBehaviour
         [SerializeField] private MovementConfigurations _movementConfigurations;
     #endregion
 
+    #region Private Attributes
+        private Player _player;
+    #endregion
+
     #region Monobehaviour Callback
+        private void Start() {
+            _player = GameObject.Find("Player").GetComponent<Player>();
+        }
         // Update is called once per frame
         void Update()
         {
@@ -21,11 +28,11 @@ public class Enemy : MonoBehaviour
         /// OnTriggerEnter is called when the Collider other enters the trigger.
         /// </summary>
         /// <param name="other">The other Collider involved in this collision.</param>
-        void OnTriggerEnter(Collider other)
+        void OnTriggerEnter2D(Collider2D other)
         {
+            Player player = other.transform.GetComponent<Player>();
            if(other.tag == "Player")
            {
-               Player player = other.transform.GetComponent<Player>();
                if(player != null)
                {
                    player.Damage();
@@ -35,6 +42,10 @@ public class Enemy : MonoBehaviour
 
            if(other.tag == "Laser")
            {
+               if(_player != null)
+               {
+                    _player.KillEnemyAndAddScore();
+               }
                Destroy(other.gameObject);
                Destroy(gameObject);
            } 
