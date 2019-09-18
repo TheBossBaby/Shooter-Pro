@@ -4,13 +4,16 @@ public class Powerup : MonoBehaviour
 {
     #region Private Attributes
         [SerializeField] private int _powerId = -1;
+        AudioManager _audioManager;
     #endregion
 
     #region Monobehaviours Callbacks
         // Start is called before the first frame update
         void Start()
         {
-        
+            _audioManager = GameObject.Find("Audio_Manager").GetComponent<AudioManager>();
+            if(_audioManager == null)
+                Debug.LogError(message: "Audio Manager is NULL");                
         }
 
         // Update is called once per frame
@@ -44,6 +47,7 @@ public class Powerup : MonoBehaviour
                             Debug.LogError("Invalid powerup Id");
                             break;
                     }
+                    _audioManager.PowerUpPickSound();
                     Destroy(gameObject);
                 }
             }    

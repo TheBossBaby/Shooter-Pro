@@ -4,10 +4,8 @@ public class Laser : MonoBehaviour
 {
     #region Serialized Private Field
         [SerializeField] private MovementConfigurations _movementConfigurations;
-        // [SerializeField] private Transform _playerTransform;
     #endregion
     
-    // Update is called once per frame
     void Update()
     {
         transform.Translate(Vector3.up * _movementConfigurations.laserMovementSpeed * Time.deltaTime);
@@ -22,8 +20,6 @@ public class Laser : MonoBehaviour
             {
                 Destroy(this.gameObject);                
             }
-            // gameObject.SetActive(false);
-            // transform.Translate(_playerTransform.position);
         }
     }
 }

@@ -30,15 +30,12 @@ public class UIManager : MonoBehaviour
         void Update()
         {
             
-        }            
+        }
     #endregion
 
     #region Public Methods
-        public void UpdateScore(int socre)
-        {
-            _scoreText.text = "Score: " + socre.ToString();
-        }
-        public void UpdateLife(int numberOfLivesLeft)
+    public void UpdateScore(int socre) => _scoreText.text = "Score: " + socre.ToString();
+    public void UpdateLife(int numberOfLivesLeft)
         {
             _lifeImage.sprite = _liveSprites[numberOfLivesLeft];
             if(numberOfLivesLeft == 0)

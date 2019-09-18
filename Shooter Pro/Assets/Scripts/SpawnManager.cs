@@ -13,21 +13,11 @@ public class SpawnManager : MonoBehaviour
     #region Private Field
         private bool _stopSpawn = false;
     #endregion
-    // Start is called beafore the first frame updategne
-    void Start()
-    {
-        StartCoroutine("SpawnRoutine");
-        StartCoroutine("SpawnPowerupRoutine");        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
 
     #region Private Coroutines
         IEnumerator SpawnRoutine()
         {
+            yield return new WaitForSeconds(3.0f);
             while(_stopSpawn == false)
             {
                 float randomX = Random.Range(-9.54f, 9.27f);
@@ -39,6 +29,7 @@ public class SpawnManager : MonoBehaviour
         }
         IEnumerator SpawnPowerupRoutine()
         {
+            yield return new WaitForSeconds(3.0f);
             while(_stopSpawn == false)
             {
                 float randomX = Random.Range(-9.54f, 9.27f);
@@ -55,6 +46,12 @@ public class SpawnManager : MonoBehaviour
         public void OnPalyerDeath()
         {
             _stopSpawn = true;
+        }
+
+        public void StartSpawning()
+        {
+            StartCoroutine("SpawnRoutine");
+            StartCoroutine("SpawnPowerupRoutine");        
         }
     #endregion
 }
