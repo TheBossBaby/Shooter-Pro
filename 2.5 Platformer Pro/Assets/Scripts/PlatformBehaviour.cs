@@ -4,7 +4,7 @@ public class PlatformBehaviour : MonoBehaviour
 {
     #region Private Attribute
         Animator _platformAnimator;
-        var _movementSpeed = 0.35;   
+        float _movementSpeed = 0.35f;   
     #endregion
 
     #region MonoBehaviour Callbacks

@@ -10,7 +10,9 @@ public class Player : MonoBehaviour
         private float _yVelocity;
         private bool _canDoubleJump;
         private int _coin;
-        UIManager _uiManager;        
+        private UIManager _uiManager;
+        private int _lives = 3;  
+        public Transform _playerInitialStage;      
 
     #endregion
 
@@ -29,6 +31,13 @@ public class Player : MonoBehaviour
         }
 
         void Update()
+        {
+            CalculatePlayerMovements();
+        }        
+    #endregion
+
+    #region Private Methods
+        private void CalculatePlayerMovements()
         {
             var horizontalInput = Input.GetAxis("Horizontal");
             var direction = new Vector3(horizontalInput,0,0);
@@ -55,14 +64,19 @@ public class Player : MonoBehaviour
 
             velocity.y = _yVelocity;
             _characterController.Move(velocity * Time.deltaTime);
-        }        
+        }
     #endregion
-
     #region Public Methods
         public void AddCoinNumber()
         {
             _coin++;
             _uiManager.UpdateCoinText(_coin);
+        }
+
+        public void PlayerDamage(int damage = 1)
+        {
+            _lives -= damage;
+            _uiManager.UpdateLifeImage(_lives);
         }
     #endregion
 }
