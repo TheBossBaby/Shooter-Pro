@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 [RequireComponent(typeof(CharacterController))]
 public class Player : MonoBehaviour
 {
@@ -13,7 +14,6 @@ public class Player : MonoBehaviour
         private UIManager _uiManager;
         private int _lives = 3;  
         public Transform _playerInitialStage;      
-
     #endregion
 
     #region Serialized Private Attribute
@@ -66,6 +66,7 @@ public class Player : MonoBehaviour
             _characterController.Move(velocity * Time.deltaTime);
         }
     #endregion
+
     #region Public Methods
         public void AddCoinNumber()
         {
@@ -77,6 +78,10 @@ public class Player : MonoBehaviour
         {
             _lives -= damage;
             _uiManager.UpdateLifeImage(_lives);
+            if(_lives <= 0)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }                
         }
     #endregion
 }
