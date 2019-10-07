@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     #endregion
 
     #region Serialized Private Attribute
+    [SerializeField] MongoDbSetup _leaderboard;
     #endregion
 
     #region MonoBehaviour Callbacks
@@ -80,6 +81,8 @@ public class Player : MonoBehaviour
             _uiManager.UpdateLifeImage(_lives);
             if(_lives <= 0)
             {
+                int[] score = {_coin};
+                _leaderboard.UpdateClientScore(score);
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }                
         }
